@@ -7,7 +7,7 @@ allows you to enable/disable your witness or set some properties for the new
 #### Installation
 
 ```
-$ pip install witness_transmitter
+$ pip install transmitter
 ```
 
 #### Configuration (Optional)
@@ -49,6 +49,8 @@ That's the same with WITNESS_ACCOUNT and URL parameters.
 ```DEFAULT_PROPERTIES``` has a special case. You can't pass it via CLI parameters or environment vars. If you
 don't fill that key, transmitter will use the latest props information belongs to your witness account in the blockchain.
 
+If you use the config file, just add ```--config-file=/path/to/config.json``` to the commands.
+
 #### Enabling the witness
 
 If you want to enable your witness:
@@ -70,6 +72,33 @@ $ transmitter set --property account_subsidy_decay=128 --property account_subsid
 ```
 
 You can send single or multiple parameters.
+
+#### Bonus: Installation with Docker
+
+```
+$ git clone https://github.com/emre/transmitter.git
+$ cd transmitter
+```
+Edit the config file as you wish:
+
+```
+$ vim config.json.docker 
+$ docker build -t transmitter .
+```
+
+After that, you can run the transmitter like ```docker run -t transmitter <command>```.
+
+Example: 
+
+```
+➜  transmitter git:(master) ✗ docker run -t transmitter disable
+2018-10-08 19:14:20,326 - transmitter.main - INFO - Connecting to the blockchain using mainnet.
+2018-10-08 19:14:21,007 - transmitter.main - INFO - Got the SIGNING_KEY in the config file.
+2018-10-08 19:14:21,238 - transmitter.main - INFO - Got the WITNESS_ACCOUNT in the config file.
+2018-10-08 19:14:21,403 - transmitter.main - INFO - Got the URL in the config file.
+2018-10-08 19:14:21,403 - transmitter.main - INFO - Disabling the witness: <Witness emrebeyler>
+2018-10-08 19:14:24,823 - transmitter.main - INFO - Operation broadcasted.
+```
 
 #### Disclaimer
 

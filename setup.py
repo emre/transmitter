@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(
-    name='witness_transmitter',
+    name='transmitter',
     version='0.0.1',
     packages=["transmitter",],
     url='http://github.com/emre/transmitter',
