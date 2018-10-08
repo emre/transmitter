@@ -10,7 +10,7 @@ from beem.steem import Steem
 from beem.witness import Witness
 from beemgraphenebase.account import PrivateKey
 
-from .constants import (NULL_WITNESS_KEY, ENV_KEYS)
+from .constants import (NULL_WITNESS_KEY, ENV_KEYS, CONFIG_FILE)
 
 
 @logme.log
@@ -54,7 +54,7 @@ class Transmitter:
                 f'Warning: No config file found at {config_file}.')
             config = {}
         else:
-            config = json.loads(config_file)
+            config = json.loads(open(config_file).read())
 
         return config
 
@@ -171,8 +171,7 @@ def main():
 
     args = parser.parse_args()
 
-    config_file = expanduser("~/.stormssh/config")
-
+    config_file = expanduser(CONFIG_FILE)
     transmitter = Transmitter(
         config_file,
         signing_key=args.signing_key,

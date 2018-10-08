@@ -1,0 +1,14 @@
+{
+    "NODES": [
+        "https://api.steemit.com"
+    ],
+    "WITNESS_ACCOUNT": "<your_witness_username>",
+    "SIGNING_KEY": "<private_signing_key>",
+    "ACTIVE_KEY": "<private_active_key>",
+    "DEFAULT_PROPERTIES": {
+      "account_creation_fee": "3 STEEM",
+      "maximum_block_size": 65536,
+      "sbd_interest_rate": 0
+    },
+    "URL": "https://steemit.com/@yourwitness"
+}
