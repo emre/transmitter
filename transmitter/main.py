@@ -1,19 +1,22 @@
 import argparse
 import getpass
 import json
+import logging
 import os
 from os.path import exists
 from os.path import expanduser
 
-import logme
 from beem.steem import Steem
 from beem.witness import Witness
 from beemgraphenebase.account import PrivateKey
 
 from .constants import (NULL_WITNESS_KEY, ENV_KEYS, CONFIG_FILE)
 
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+logging.basicConfig()
 
-@logme.log
+
 class Transmitter:
 
     def __init__(self, config_file, signing_key=None, active_key=None,
@@ -25,14 +28,14 @@ class Transmitter:
         # Private signing key
         if signing_key:
             self.signing_key = PrivateKey(signing_key)
-            self.logger.info(f"Got the SIGNING_KEY in the parameters.")
+            logger.info(f"Got the SIGNING_KEY in the parameters.")
         else:
             self.signing_key = self._get_config_key('SIGNING_KEY', is_key=True)
 
         # Convert the witness account string into beem.Witness
         if witness_account:
             self.witness_account = witness_account
-            self.logger.info("Got the WITNESS_ACCOUNT in the parameters.")
+            logger.info("Got the WITNESS_ACCOUNT in the parameters.")
         else:
             self.witness_account = self._get_config_key('WITNESS_ACCOUNT')
         self.witness_account = Witness(
@@ -40,7 +43,7 @@ class Transmitter:
 
         # register the witness URL
         if url:
-            self.logger.info("Got the URL in the parameters.")
+            logger.info("Got the URL in the parameters.")
             self.url = url
         else:
             self.url = self._get_config_key('URL')
@@ -50,7 +53,7 @@ class Transmitter:
 
     def get_config(self, config_file):
         if not exists(config_file):
-            self.logger.warning(
+            logger.warning(
                 f'Warning: No config file found at {config_file}.')
             config = {}
         else:
@@ -62,7 +65,7 @@ class Transmitter:
         if not keys:
             keys = []
 
-        self.logger.info("Connecting to the blockchain using mainnet.")
+        logger.info("Connecting to the blockchain using mainnet.")
         nodes = config.get("nodes") or ["https://api.steemit.com"]
         steem = Steem(node=nodes, keys=keys)
 
@@ -72,7 +75,7 @@ class Transmitter:
 
         # check config file
         if config_key in self.config:
-            self.logger.info(f"Got the {config_key} in the config file.")
+            logger.info(f"Got the {config_key} in the config file.")
             if is_key:
                 return PrivateKey(
                     self.config.get(config_key))
@@ -82,7 +85,7 @@ class Transmitter:
         # check the environment vars
         config_val = os.getenv(ENV_KEYS[config_key])
         if config_val:
-            self.logger.info(f"Got the {config_key} in the environment vars.")
+            logger.info(f"Got the {config_key} in the environment vars.")
             if is_key:
                 return PrivateKey(config_val)
             return config_val
@@ -105,7 +108,7 @@ class Transmitter:
     def _get_base_properties(self):
         default_props = self.config.get("DEFAULT_PROPERTIES")
         if not default_props:
-            self.logger.info("Couldn't find DEFAULT_PROPERTIES in the config. "
+            logger.info("Couldn't find DEFAULT_PROPERTIES in the config. "
                              "Falling back to latest props on the blockchain.")
             default_props = self.witness_account["props"]
 
@@ -124,10 +127,10 @@ class Transmitter:
             props,
             account=self.witness_account["owner"],
         )
-        self.logger.info(f'Operation broadcasted.')
+        logger.info(f'Operation broadcasted.')
 
     def disable(self):
-        self.logger.info(f"Disabling the witness: {self.witness_account}")
+        logger.info(f"Disabling the witness: {self.witness_account}")
         self.steem.witness_set_properties(
             str(self.signing_key),
             self.witness_account["owner"],
@@ -135,7 +138,7 @@ class Transmitter:
                 "new_signing_key": NULL_WITNESS_KEY,
             }
         )
-        self.logger.info(f'Operation broadcasted.')
+        logger.info(f'Operation broadcasted.')
 
     def set(self, properties):
         if not len(properties):
@@ -154,7 +157,7 @@ class Transmitter:
             self.witness_account["owner"],
             props,
         )
-        self.logger.info(f'Operation broadcasted.')
+        logger.info(f'Operation broadcasted.')
 
 
 def main():

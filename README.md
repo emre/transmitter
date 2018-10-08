@@ -49,8 +49,6 @@ That's the same with WITNESS_ACCOUNT and URL parameters.
 ```DEFAULT_PROPERTIES``` has a special case. You can't pass it via CLI parameters or environment vars. If you
 don't fill that key, transmitter will use the latest props information belongs to your witness account in the blockchain.
 
-If you use the config file, just add ```--config-file=/path/to/config.json``` to the commands.
-
 #### Enabling the witness
 
 If you want to enable your witness:

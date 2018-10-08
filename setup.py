@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='transmitter',
-    version='0.0.1',
+    version='0.0.2',
     packages=["transmitter",],
     url='http://github.com/emre/transmitter',
     license='MIT',
@@ -14,5 +14,5 @@ setup(
             'transmitter = transmitter.main:main',
         ],
     },
-    install_requires=["beem", "logme"]
+    install_requires=["beem"]
 )
