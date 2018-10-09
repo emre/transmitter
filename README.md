@@ -2,7 +2,7 @@
 
 Transmitter is a CLI tool for STEEM blockchain witnesses. It quickly
 allows you to enable/disable your witness or set some properties for the new
-*witness_set_properties*. call introduced in Hard Fork 20.
+*witness_set_properties* call introduced in Hard Fork 20.
 
 #### Installation
 
@@ -15,6 +15,7 @@ $ pip install transmitter
 If you don't want to repeat yourself while calling commands, create a configuration file on your user directory:
 
 ```
+$ mkdir -p ~/.transmitter
 $ touch ~/.transmitter/config.json
 ```
 
@@ -41,7 +42,7 @@ All keys are optional. If you don't want to keep your signing key and active key
 
 You can pass it to the commands in different ways:
 
-- Use ```TRANSMITTER_SIGNING_KEY``` and ```TRANSMITTER_SIGNING_KEY``` environment values.
+- Use ```TRANSMITTER_SIGNING_KEY``` and ```TRANSMITTER_ACTIVE_KEY``` environment values.
 - Use --signing-key and --active-key params while running the tool.
 
 That's the same with WITNESS_ACCOUNT and URL parameters. 
