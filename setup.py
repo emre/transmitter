@@ -2,8 +2,13 @@ from setuptools import setup, find_packages
 
 setup(
     name='transmitter',
-    version='0.1.0',
-    packages=find_packages(),
+    version='0.1.1',
+    packages=[
+        'transmitter',
+        'transmitter.pricefeed',
+        'transmitter.pricefeed.adapters',
+        'transmitter.pricefeed.adapters',
+    ],
     url='http://github.com/emre/transmitter',
     license='MIT',
     author='emre yilmaz',
