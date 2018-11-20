@@ -2,11 +2,10 @@ from setuptools import setup, find_packages
 
 setup(
     name='transmitter',
-    version='0.1.1',
+    version='0.1.2',
     packages=[
         'transmitter',
         'transmitter.pricefeed',
-        'transmitter.pricefeed.adapters',
         'transmitter.pricefeed.adapters',
     ],
     url='http://github.com/emre/transmitter',
