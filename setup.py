@@ -1,9 +1,9 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
     name='transmitter',
-    version='0.0.2',
-    packages=["transmitter",],
+    version='0.0.3',
+    packages=find_packages(),
     url='http://github.com/emre/transmitter',
     license='MIT',
     author='emre yilmaz',
@@ -14,5 +14,5 @@ setup(
             'transmitter = transmitter.main:main',
         ],
     },
-    install_requires=["beem"]
+    install_requires=["beem", "requests"]
 )
