@@ -1,11 +1,15 @@
 from .adapters.binance import BinanceAdapter
 from .adapters.poloniex import PoloniexAdapter
 from .adapters.bittrex import BittrexAdapter
+from .adapters.huobi import HuobiAdapter
+from .adapters.upbit import UpbitAdapter
 
 AVAILABLE_MARKETS = {
     "poloniex": PoloniexAdapter,
     "binance": BinanceAdapter,
     "bittrex": BittrexAdapter,
+    "huobi": HuobiAdapter,
+    "upbit": UpbitAdapter,
 }
 
 
