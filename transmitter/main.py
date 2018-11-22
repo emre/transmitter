@@ -13,7 +13,11 @@ from beemgraphenebase.account import PrivateKey
 from beem.amount import Amount
 
 from .constants import (NULL_WITNESS_KEY, ENV_KEYS, CONFIG_FILE)
-from .pricefeed.markets import (is_marketlist_valid, get_average_price)
+from .pricefeed.markets import (is_marketlist_valid,
+                                get_average_price,
+                                exclude_outliers,
+                                get_prices,
+                                DEFAULT_MARKETS)
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -58,11 +62,14 @@ class Transmitter:
         # market list to publish price feeds
         self.markets = markets
         if action == "publish_feed" and not markets:
-            self.markets = self._get_config_key('MARKETS')
+            self.markets = self._get_config_key(
+                'MARKETS', ask_to_stdin=False)
+            if not self.markets:
+                self.markets = DEFAULT_MARKETS
             if not is_marketlist_valid(self.markets):
                 logger.error("Invalid market list")
                 sys.exit(0)
-        if self.markets:
+        if self.markets and not isinstance(self.markets, list):
             # convert comma separated string into list
             self.markets = list(
                 map(lambda x: x.strip(), self.markets.split(",")))
@@ -89,7 +96,7 @@ class Transmitter:
 
         return steem
 
-    def _get_config_key(self, config_key, is_key=False):
+    def _get_config_key(self, config_key, is_key=False, ask_to_stdin=True):
 
         # check config file
         if config_key in self.config:
@@ -107,6 +114,9 @@ class Transmitter:
             if is_key:
                 return PrivateKey(config_val)
             return config_val
+
+        if not ask_to_stdin:
+            return None
 
         if is_key:
             config_val = PrivateKey(
@@ -188,7 +198,15 @@ class Transmitter:
         logger.info(f'Operation broadcasted.')
 
     def publish_feed(self):
-        average_price = get_average_price(self.markets)
+        prices = get_prices(self.markets)
+        logger.info(f"Prices: {prices}")
+        filtered_prices = exclude_outliers(prices)
+        if len(self.markets) > 2 and len(prices) != len(filtered_prices):
+            # outlier detection is only applicable if we have at least
+            # three markets.
+            logger.info(f"Prices after outlier detection: {filtered_prices}")
+            prices = filtered_prices
+        average_price = get_average_price(prices)
         base = Amount(average_price, "SBD")
         quote = Amount(
             round(float(1) / float(self.peg_multiplier), 3), "STEEM")
@@ -214,7 +232,8 @@ def main():
     parser.add_argument('--peg_multiplier', help="Peg multiplier", type=int)
     parser.add_argument(
         '--markets',
-        help="Comma separated market list. Options: bittrex, poloniex, binance"
+        help="Comma separated market list. "
+             "Options: bittrex, poloniex, binance, upbit, huobi"
     )
 
     args = parser.parse_args()
