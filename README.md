@@ -70,6 +70,12 @@ $ transmitter disable
 $ transmitter set --property account_subsidy_decay=128 --property account_subsidy_budget=2
 ```
 
+#### Price feed
+
+```
+$ transmitter publish_feed
+```
+
 You can send single or multiple parameters.
 
 #### Bonus: Installation with Docker
