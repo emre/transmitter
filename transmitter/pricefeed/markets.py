@@ -3,11 +3,9 @@ import numpy as np
 from .adapters.binance import BinanceAdapter
 from .adapters.bittrex import BittrexAdapter
 from .adapters.huobi import HuobiAdapter
-from .adapters.poloniex import PoloniexAdapter
 from .adapters.upbit import UpbitAdapter
 
 AVAILABLE_MARKETS = {
-    "poloniex": PoloniexAdapter,
     "binance": BinanceAdapter,
     "bittrex": BittrexAdapter,
     "huobi": HuobiAdapter,
