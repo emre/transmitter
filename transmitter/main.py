@@ -91,7 +91,7 @@ class Transmitter:
             keys = []
 
         logger.info("Connecting to the blockchain using mainnet.")
-        nodes = config.get("nodes") or ["https://api.steemit.com"]
+        nodes = config.get("NODES") or ["https://api.steemit.com"]
         steem = Steem(node=nodes, keys=keys)
 
         return steem
@@ -233,7 +233,7 @@ def main():
     parser.add_argument(
         '--markets',
         help="Comma separated market list. "
-             "Options: bittrex, poloniex, binance, upbit, huobi"
+             "Options: bittrex, binance, upbit, huobi"
     )
 
     args = parser.parse_args()
