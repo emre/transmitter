@@ -8,7 +8,7 @@ class BittrexAdapter(BaseAdapter):
 
     def get_price(self):
         btc_steem_response = requests.get(
-            self.BASE_URL, params={"market": "BTC-STEEM"})
+            self.BASE_URL, params={"market": "BTC-HIVE"})
         btc_steem_response_json = self.validate_response(btc_steem_response)
 
         usd_btc_response = requests.get(

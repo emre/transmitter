@@ -1,15 +1,15 @@
 import numpy as np
 
-from .adapters.binance import BinanceAdapter
+# from .adapters.binance import BinanceAdapter # disabled temporarily
 from .adapters.bittrex import BittrexAdapter
-from .adapters.huobi import HuobiAdapter
-from .adapters.upbit import UpbitAdapter
+# from .adapters.huobi import HuobiAdapter # disabled temporarily
+# from .adapters.upbit import UpbitAdapter # disabled temporarily
 
 AVAILABLE_MARKETS = {
-    "binance": BinanceAdapter,
-    "bittrex": BittrexAdapter,
-    "huobi": HuobiAdapter,
-    "upbit": UpbitAdapter,
+    # "binance": BinanceAdapter,
+    "bittrex": BittrexAdapter,  # disabled temporarily
+    # "huobi": HuobiAdapter, # disabled temporarily
+    # "upbit": UpbitAdapter, # disabled temporarily
 }
 
 DEFAULT_MARKETS = list(AVAILABLE_MARKETS.keys())

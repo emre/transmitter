@@ -24,6 +24,19 @@ logger.setLevel(logging.INFO)
 logging.basicConfig()
 
 
+# HIVE chain config
+custom_chains = {
+    'HIVE': dict(
+        chain_assets=[
+            dict(asset='@@000000013', id=0, precision=3, symbol='HBD'),
+            dict(asset='@@000000021', id=1, precision=3, symbol='HIVE'),
+            dict(asset='@@000000037', id=2, precision=6, symbol='VESTS')
+        ],
+        chain_id="0" * int(256 / 4), min_version='0.23.0', prefix='STM'
+    )
+}
+
+
 class Transmitter:
 
     def __init__(self, config_file, action=None, signing_key=None,
@@ -91,8 +104,11 @@ class Transmitter:
             keys = []
 
         logger.info("Connecting to the blockchain using mainnet.")
-        nodes = config.get("NODES") or ["https://api.steemit.com"]
-        steem = Steem(node=nodes, keys=keys)
+        nodes = config.get("NODES") or [
+            "https://api.hive.blog",
+            "https://api.hivekings.com",
+            "https://anyx.io"]
+        steem = Steem(node=nodes, keys=keys, custom_chains=custom_chains)
 
         return steem
 

@@ -1,6 +1,6 @@
 #### transmitter
 
-Transmitter is a CLI tool for STEEM blockchain witnesses. It quickly
+Transmitter is a CLI tool for HIVE blockchain witnesses. It quickly
 allows you to enable/disable your witness or set some properties for the new
 *witness_set_properties* call introduced in Hard Fork 20.
 
@@ -24,7 +24,7 @@ Fill it with the corresponding values:
 ```javascript
 {
     "NODES": [
-        "https://api.steemit.com"
+        "https://api.hivekings.com"
     ],
     "WITNESS_ACCOUNT": "<your_witness_account>",
     "SIGNING_KEY": "<signing_key>",
@@ -34,7 +34,7 @@ Fill it with the corresponding values:
       "maximum_block_size": 65536,
       "sbd_interest_rate": 0
     },
-    "URL": "https://steemit.com/@emrebeyler"
+    "URL": "https://hive.blog/@emrebeyler"
 }
 ```
 
