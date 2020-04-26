@@ -6,9 +6,10 @@ class BaseAdapter:
 
     PRICE_PRECISION = 4
 
-    def __init__(self):
+    def __init__(self, config=None):
         self.logger = logging.getLogger(__name__)
         self.logger.setLevel(logging.INFO)
+        self.config = config or {}
 
     def get_usd_btc_pair(self):
         resp = requests.get("https://api.coinmarketcap.com/v1/ticker/bitcoin/")

@@ -1,15 +1,19 @@
+import os
+
 import numpy as np
 
-# from .adapters.binance import BinanceAdapter # disabled temporarily
 from .adapters.bittrex import BittrexAdapter
-# from .adapters.huobi import HuobiAdapter # disabled temporarily
-# from .adapters.upbit import UpbitAdapter # disabled temporarily
+from .adapters.probit import ProbitAdapter
+from .adapters.huobi import HuobiAdapter
+from .adapters.ionomy import IonomyAdapter
+from .adapters.mxc import MxcAdapter
 
 AVAILABLE_MARKETS = {
-    # "binance": BinanceAdapter,
-    "bittrex": BittrexAdapter,  # disabled temporarily
-    # "huobi": HuobiAdapter, # disabled temporarily
-    # "upbit": UpbitAdapter, # disabled temporarily
+    "bittrex": BittrexAdapter,
+    "probit": ProbitAdapter,
+    "huobi": HuobiAdapter,
+    "ionomy": IonomyAdapter,
+    "mxc": MxcAdapter,
 }
 
 DEFAULT_MARKETS = list(AVAILABLE_MARKETS.keys())
@@ -23,8 +27,12 @@ def is_marketlist_valid(market_list):
 
 
 def get_prices(markets):
+    config_options = {
+        "MXC_API_KEY": os.getenv("MXC_API_KEY")  # Only needed for MXC Exchange
+    }
     return [
-        AVAILABLE_MARKETS.get(market)().get_price() for market in markets]
+        AVAILABLE_MARKETS.get(market)(
+            config=config_options).get_price() for market in markets]
 
 
 def get_average_price(prices):

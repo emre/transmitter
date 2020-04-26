@@ -8,7 +8,7 @@ class HuobiAdapter(BaseAdapter):
 
     def get_price(self):
         btc_steem_response = requests.get(
-            self.BASE_URL, params={"symbol": "steembtc"})
+            self.BASE_URL, params={"symbol": "hivebtc"})
         btc_steem_response_json = self.validate_response(btc_steem_response)
 
         usd_btc_response = requests.get(

@@ -249,7 +249,7 @@ def main():
     parser.add_argument(
         '--markets',
         help="Comma separated market list. "
-             "Options: bittrex, binance, upbit, huobi"
+             "Options: bittrex, probit, huobi, ionomy, mxc"
     )
 
     args = parser.parse_args()
