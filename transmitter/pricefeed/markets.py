@@ -7,6 +7,7 @@ from .adapters.probit import ProbitAdapter
 from .adapters.huobi import HuobiAdapter
 from .adapters.ionomy import IonomyAdapter
 from .adapters.mxc import MxcAdapter
+from .adapters.binance import BinanceAdapter
 
 AVAILABLE_MARKETS = {
     "bittrex": BittrexAdapter,
@@ -14,6 +15,7 @@ AVAILABLE_MARKETS = {
     "huobi": HuobiAdapter,
     "ionomy": IonomyAdapter,
     "mxc": MxcAdapter,
+    "binance": BinanceAdapter,
 }
 
 DEFAULT_MARKETS = list(AVAILABLE_MARKETS.keys())

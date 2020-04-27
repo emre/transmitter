@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='transmitter',
-    version='0.2.4',
+    version='0.2.5',
     packages=[
         'transmitter',
         'transmitter.pricefeed',
