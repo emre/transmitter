@@ -24,15 +24,15 @@ Fill it with the corresponding values:
 ```javascript
 {
     "NODES": [
-        "https://api.hivekings.com"
+        "https://hived.emre.sh"
     ],
     "WITNESS_ACCOUNT": "<your_witness_account>",
     "SIGNING_KEY": "<signing_key>",
     "ACTIVE_KEY": "<active_key>",
     "DEFAULT_PROPERTIES": {
-      "account_creation_fee": "3 STEEM",
+      "account_creation_fee": "3 HIVE",
       "maximum_block_size": 65536,
-      "sbd_interest_rate": 0
+      "hbd_interest_rate": 0
     },
     "URL": "https://hive.blog/@emrebeyler"
 }
