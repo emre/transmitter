@@ -18,7 +18,9 @@ AVAILABLE_MARKETS = {
     "binance": BinanceAdapter,
 }
 
-DEFAULT_MARKETS = list(AVAILABLE_MARKETS.keys())
+# Don't set MXC as a default market
+# since it requires an API key and it has a TTL of 90 days.
+DEFAULT_MARKETS = list(set(AVAILABLE_MARKETS.keys()) - set(["mxc"]))
 
 
 def is_marketlist_valid(market_list):
