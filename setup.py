@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='transmitter',
-    version='0.2.7',
+    version='0.2.8',
     packages=[
         'transmitter',
         'transmitter.pricefeed',
@@ -18,5 +18,5 @@ setup(
             'transmitter = transmitter.main:main',
         ],
     },
-    install_requires=["beem==0.23.9", "requests", "numpy"]
+    install_requires=["beem==0.24.19", "requests", "numpy"]
 )
