@@ -19,6 +19,8 @@ from .pricefeed.markets import (is_marketlist_valid,
                                 get_prices,
                                 DEFAULT_MARKETS)
 
+from . import __version__
+
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 logging.basicConfig()
@@ -227,6 +229,11 @@ def main():
         "action",
         help="An action to perform.",
         choices=["enable", "disable", "set", "publish_feed"])
+    parser.add_argument(
+        '--version',
+        action='version',
+        version='%(prog)s v{version_number}'.format(
+            version_number=__version__))
     parser.add_argument('--signing-key', help="Private signing key")
     parser.add_argument('--active-key', help="Private active key")
     parser.add_argument('--witness-account', help="Witness account")

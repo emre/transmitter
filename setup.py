@@ -1,8 +1,10 @@
 from setuptools import setup
 
+from transmitter import __version__
+
 setup(
     name='transmitter',
-    version='0.2.8',
+    version=__version__,
     packages=[
         'transmitter',
         'transmitter.pricefeed',
