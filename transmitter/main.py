@@ -180,15 +180,15 @@ class Transmitter:
         props = {}
         for _property in properties:
             if isinstance(_property, dict):
-                # sbd_exchange_rate has a special case
+                # hbd_exchange_rate has a special case
                 # where it's value is a dict
                 # instead of a straight string or integer.
-                key = "sbd_exchange_rate"
-                val = _property["sbd_exchange_rate"]
+                key = "hbd_exchange_rate"
+                val = _property["hbd_exchange_rate"]
             else:
                 key, val = _property.split("=")
             if isinstance(_property, dict):
-                props["sbd_exchange_rate"] = val
+                props["hbd_exchange_rate"] = val
             else:
                 try:
                     props[key] = int(val)
@@ -216,7 +216,7 @@ class Transmitter:
         quote = Amount(
             round(float(1) / float(self.peg_multiplier), 3), "HIVE")
         properties = [{
-            "sbd_exchange_rate": {
+            "hbd_exchange_rate": {
                 "base": base, "quote": quote}
         }]
         logger.info(f"Base price: {base}, Quote price: {quote}")

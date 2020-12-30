@@ -14,7 +14,7 @@ setup(
     license='MIT',
     author='emre yilmaz',
     author_email='mail@emreyilmaz.me',
-    description='STEEM Witness updates made easy.',
+    description='HIVE Witness updates made easy.',
     entry_points={
         'console_scripts': [
             'transmitter = transmitter.main:main',
