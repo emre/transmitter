@@ -20,5 +20,5 @@ setup(
             'transmitter = transmitter.main:main',
         ],
     },
-    install_requires=["beem==0.24.19", "requests", "numpy"]
+    install_requires=["beem==0.24.26", "requests", "numpy"]
 )
